@@ -55,16 +55,20 @@ export default function Portfolio() {
         Portfolio
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center">
+      <Grid container spacing={4} justifyContent="center" alignItems="stretch">
         {projects.map(({ title, description, url, github }) => (
-          <Grid size={{ xs: 12, sm: 10, md: 6 }} key={title}>
+          <Grid
+            size={{ xs: 12, sm: 10, md: 6 }}
+            sx={{ display: "flex" }}
+            key={title}
+          >
             <Card
               sx={{
                 bgcolor: theme.palette.background.paper + "DD",
                 boxShadow: 3,
                 borderRadius: 2,
                 textAlign: "left",
-                width: { xs: "100%", sm: 800 },
+                width: "100%", // let Grid control width
                 mx: "auto",
                 display: "flex",
                 flexDirection: "column",
@@ -77,14 +81,20 @@ export default function Portfolio() {
                   maxWidth: 800,
                   height: { xs: 300, sm: 400 },
                   borderRadius: 1,
-                  overflow: "hidden",
+                  overflow: "hidden", // hide anything overflowing horizontally or vertically
                   boxShadow: 3,
                   mt: 2,
                 }}
               >
                 <iframe
                   src={url}
-                  style={{ width: "100%", height: "100%", border: "none" }}
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    border: "none",
+                    overflow: "hidden", // hide iframe internal scrollbars
+                    display: "block", // prevent inline spacing issues
+                  }}
                   title={`${title} live preview`}
                   loading="lazy"
                 />
