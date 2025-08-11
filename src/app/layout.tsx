@@ -24,6 +24,7 @@ export default function RootLayout({
           name="description"
           content="Professional full-stack web solutions by Andrew Donnelly, using Next.js, MUI, and TypeScript. Innovative, responsive, Gryffindor-inspired design."
         />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link
           rel="apple-touch-icon"
           sizes="180x180"
