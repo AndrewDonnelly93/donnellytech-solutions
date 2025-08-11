@@ -19,9 +19,9 @@ export default function Footer() {
       }}
     >
       <Typography gutterBottom>
-        &copy; {new Date().getFullYear()} Donnelly Tech Solutions. All rights
-        reserved.
+        &copy; {new Date().getFullYear()} Donnelly Tech Solutions
       </Typography>
+      <Typography gutterBottom>All rights reserved.</Typography>
       <Typography>
         📞 <strong>+353 87 607 26 84</strong> |{" "}
         <MuiLink
@@ -38,72 +38,94 @@ export default function Footer() {
           andrew.donnelly.1403@gmail.com
         </MuiLink>
       </Typography>
+
       <Typography mt={1}>
-        <MuiLink
-          href="/portfolio"
+        {/* First row with three links */}
+        <Box
+          component="span"
           sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            mx: 1,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
+            display: "inline-flex",
+            flexWrap: "wrap",
+            alignItems: "center",
           }}
         >
-          Portfolio
-        </MuiLink>
-        |
-        <MuiLink
-          href="/contact"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            mx: 1,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          Contact
-        </MuiLink>
-        |
-        <MuiLink
-          href="https://www.linkedin.com/in/andrewdonnelly93/"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            mx: 1,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          <LinkedInIcon sx={{ mr: 0.5, verticalAlign: "middle" }} />
-          LinkedIn
-        </MuiLink>
-        |
-        <MuiLink
-          href="https://github.com/AndrewDonnelly93"
-          target="_blank"
-          rel="noopener noreferrer"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            mx: 1,
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          <GitHubIcon sx={{ mr: 0.5, verticalAlign: "middle" }} />
-          GitHub
-        </MuiLink>
+          <MuiLink
+            href="/portfolio"
+            sx={{
+              color: theme.palette.secondary.main,
+              textDecoration: "underline",
+              mx: 1,
+              transition: "color 0.3s ease",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+              },
+            }}
+          >
+            Portfolio
+          </MuiLink>
+          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+            |
+          </Box>
+          <MuiLink
+            href="/contact"
+            sx={{
+              color: theme.palette.secondary.main,
+              textDecoration: "underline",
+              mx: 1,
+              transition: "color 0.3s ease",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+              },
+            }}
+          >
+            Contact
+          </MuiLink>
+          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+            |
+          </Box>
+          <MuiLink
+            href="https://www.linkedin.com/in/andrewdonnelly93/"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: theme.palette.secondary.main,
+              textDecoration: "underline",
+              mx: 1,
+              transition: "color 0.3s ease",
+              display: "inline-flex",
+              alignItems: "center",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+              },
+            }}
+          >
+            <LinkedInIcon sx={{ mr: 0.5 }} />
+            LinkedIn
+          </MuiLink>
+        </Box>
+
+        {/* Second row with GitHub link */}
+        <Box mt={1}>
+          <MuiLink
+            href="https://github.com/AndrewDonnelly93"
+            target="_blank"
+            rel="noopener noreferrer"
+            sx={{
+              color: theme.palette.secondary.main,
+              textDecoration: "underline",
+              mx: 1,
+              transition: "color 0.3s ease",
+              display: "inline-flex",
+              alignItems: "center",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+              },
+            }}
+          >
+            <GitHubIcon sx={{ mr: 0.5 }} />
+            GitHub
+          </MuiLink>
+        </Box>
       </Typography>
     </Box>
   );
