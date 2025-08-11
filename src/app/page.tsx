@@ -86,29 +86,31 @@ export default function Home() {
         }}
       >
         {/* Intro */}
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           Hi, I am Andrew — a writer and software engineer with a strong focus
           on modern full-stack development, React ecosystems, and intuitive user
           experiences. I believe good software feels like poetry: structured,
           expressive, and intentional.
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           💻 Full-stack developer focused on React, Next.js, and Node.js
         </Typography>
-        <Typography variant="body1" paragraph>
-          🌍 Based in London, working with clients across Europe and the UK
+        <Typography variant="body1">
+          🌍 Currently based in Ireland, actively seeking opportunities in
+          London and open to relocation or remote work. I am working with
+          clients across Europe and the UK
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           📚 Writing a memoir and editing essays in my spare time
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           🧭 Travelling Europe and the world, exploring stories, and debugging
           life one bug at a time
         </Typography>
-        <Typography variant="body1" paragraph>
+        <Typography variant="body1">
           🏗️ Always learning, always iterating — on code and life
         </Typography>
-        <Typography variant="body1" fontStyle="italic" paragraph>
+        <Typography variant="body1" fontStyle="italic">
           &quot;Code is just another form of storytelling.&quot;
         </Typography>
 
