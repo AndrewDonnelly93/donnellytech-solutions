@@ -28,7 +28,7 @@ This is the official website for **Donnelly Tech Solutions**, a software enginee
 
 1. Clone the repo:
 
-```bash
+````bash
 git clone https://github.com/AndrewDonnelly93/donnelly-tech-solutions.git
 cd donnelly-tech-solutions
 
@@ -75,3 +75,4 @@ Email: contact@donnellytech.com
 Phone: +353876072684
 LinkedIn: linkedin.com/in/andrewdonnelly93
 
+````
