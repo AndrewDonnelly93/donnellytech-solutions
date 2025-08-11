@@ -59,15 +59,17 @@ export default function Home() {
           gutterBottom
           sx={{ mb: { xs: 3, sm: 4 }, textAlign: "center" }}
         >
-          Brave solutions, bold code, bright future.
+          Practical solutions, clean code, real results.
         </Typography>
       </FadeInSection>
 
       <FadeInSection>
         <Typography variant="body1" maxWidth={600} mb={6} sx={{ mx: "auto" }}>
-          Led by Andrew Donnelly — software engineer, sole director, and owner.
-          Crafting cutting-edge web solutions with Next.js, MUI, and TypeScript.
-          Committed to excellence and courageous problem-solving.
+          I run my own software development company, building and delivering web
+          applications directly to clients. I am a full-stack developer focused
+          on React, Next.js, Node.js, and TypeScript. I am passionate about
+          creating practical, maintainable software and continuously learning
+          new technologies to solve real-world problems.
         </Typography>
       </FadeInSection>
 
@@ -101,13 +103,13 @@ export default function Home() {
         {/* Intro */}
         <FadeInSection>
           <Typography variant="body1">
-            Hi, I am Andrew — a writer and software engineer with a strong focus
-            on modern full-stack development, React ecosystems, and intuitive
-            user experiences. I believe good software feels like poetry:
-            structured, expressive, and intentional.
+            Hi, I am Andrew — a full-stack developer with a strong focus on
+            modern web development, React ecosystems, and intuitive user
+            experiences. I believe good software is like well-crafted
+            storytelling: clear, expressive, and purposeful.
           </Typography>
           <Typography variant="body1">
-            💻 Full-stack developer focused on React, Next.js, and Node.js
+            💻 React, Next.js, Node.js, TypeScript
           </Typography>
           <Typography variant="body1">
             🌍 Currently based in Ireland, actively seeking opportunities in
@@ -140,26 +142,20 @@ export default function Home() {
           >
             What I Do
           </Typography>
-          <Typography variant="body1" paragraph>
-            I build responsive, user-friendly websites with powerful features
-            tailored to your needs. For example, I recently developed a full
-            ecommerce artist portfolio for David McEwen, featuring:
+           <Typography variant="body1" paragraph>
+            I build responsive, user-friendly websites and applications tailored to
+            your needs. For example, I recently developed a full ecommerce artist
+            portfolio for David McEwen, which included:
           </Typography>
           <ul>
             <li>Stripe payment integration for smooth, secure transactions</li>
-            <li>Contentful CMS to easily manage and showcase artworks</li>
-            <li>
-              Custom email notifications and contact forms for seamless
-              communication
-            </li>
-            <li>
-              Fully responsive design ensuring great experience on all devices
-            </li>
+            <li>Contentful CMS for easy artwork management and showcasing</li>
+            <li>Custom email notifications and contact forms</li>
+            <li>Fully responsive design for seamless experiences on all devices</li>
           </ul>
           <Typography variant="body1">
-            Whether you need a business site, portfolio, or custom web app, I
-            deliver quality solutions using modern tools like Next.js, MUI, and
-            TypeScript.
+            Whether you need a business site, portfolio, or custom web app, I deliver
+            quality solutions using modern tools like Next.js, MUI, and TypeScript.
           </Typography>
         </FadeInSection>
 
