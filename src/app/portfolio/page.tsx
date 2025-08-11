@@ -55,98 +55,106 @@ export default function Portfolio() {
         Portfolio
       </Typography>
 
-      <Grid container spacing={4} justifyContent="center" alignItems="stretch">
-        {projects.map(({ title, description, url, github }) => (
-          <Grid
-            size={{ xs: 12, sm: 10, md: 6 }}
-            sx={{ display: "flex" }}
-            key={title}
-          >
-            <Card
-              sx={{
-                bgcolor: theme.palette.background.paper + "DD",
-                boxShadow: 3,
-                borderRadius: 2,
-                textAlign: "left",
-                width: "100%", // let Grid control width
-                mx: "auto",
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
+      <Box sx={{ overflowX: "hidden" }}>
+        <Grid
+          container
+          spacing={4}
+          justifyContent="center"
+          alignItems="stretch"
+        >
+          {projects.map(({ title, description, url, github }) => (
+            <Grid
+              size={{ xs: 12, sm: 10, md: 6 }}
+              sx={{ display: "flex" }}
+              key={title}
             >
-              <Box
+              <Card
                 sx={{
-                  width: "100%",
-                  maxWidth: 800,
-                  height: { xs: 300, sm: 400 },
-                  borderRadius: 1,
-                  overflow: "hidden", // hide anything overflowing horizontally or vertically
+                  bgcolor: theme.palette.background.paper + "DD",
                   boxShadow: 3,
-                  mt: 2,
+                  borderRadius: 2,
+                  textAlign: "left",
+                  width: "100%", // let Grid control width
+                  mx: "auto",
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  boxSizing: "border-box",
                 }}
               >
-                <iframe
-                  src={url}
-                  style={{
+                <Box
+                  sx={{
                     width: "100%",
-                    height: "100%",
-                    border: "none",
-                    overflow: "hidden", // hide iframe internal scrollbars
-                    display: "block", // prevent inline spacing issues
+                    maxWidth: 800,
+                    height: { xs: 300, sm: 400 },
+                    borderRadius: 1,
+                    overflow: "hidden", // hide anything overflowing horizontally or vertically
+                    boxShadow: 3,
+                    mt: 2,
                   }}
-                  title={`${title} live preview`}
-                  loading="lazy"
-                />
-              </Box>
-
-              <CardContent
-                sx={{
-                  width: "100%",
-                  px: 2,
-                }}
-              >
-                <Typography
-                  variant="h5"
-                  component="h2"
-                  gutterBottom
-                  sx={{ fontFamily: theme.typography.h3.fontFamily }}
                 >
-                  {title}
-                </Typography>
-                <Typography variant="body1" sx={{ mb: 2 }} gutterBottom>
-                  {description}
-                </Typography>
-
-                <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
-                  <Button
-                    size="small"
-                    variant="contained"
-                    color="secondary"
-                    component="a"
-                    href={url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Live Site
-                  </Button>
-                  <Button
-                    size="small"
-                    variant="outlined"
-                    color="secondary"
-                    component="a"
-                    href={github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    GitHub Repo
-                  </Button>
+                  <iframe
+                    src={url}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      border: "none",
+                      overflow: "hidden", // hide iframe internal scrollbars
+                      display: "block", // prevent inline spacing issues
+                    }}
+                    title={`${title} live preview`}
+                    loading="lazy"
+                  />
                 </Box>
-              </CardContent>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+
+                <CardContent
+                  sx={{
+                    width: "100%",
+                    px: 2,
+                  }}
+                >
+                  <Typography
+                    variant="h5"
+                    component="h2"
+                    gutterBottom
+                    sx={{ fontFamily: theme.typography.h3.fontFamily }}
+                  >
+                    {title}
+                  </Typography>
+                  <Typography variant="body1" sx={{ mb: 2 }} gutterBottom>
+                    {description}
+                  </Typography>
+
+                  <Box sx={{ display: "flex", gap: 2, flexWrap: "wrap" }}>
+                    <Button
+                      size="small"
+                      variant="contained"
+                      color="secondary"
+                      component="a"
+                      href={url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      Live Site
+                    </Button>
+                    <Button
+                      size="small"
+                      variant="outlined"
+                      color="secondary"
+                      component="a"
+                      href={github}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      GitHub Repo
+                    </Button>
+                  </Box>
+                </CardContent>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      </Box>
 
       <Box sx={{ mt: 6 }}>
         <Link href="/" passHref>
