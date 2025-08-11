@@ -57,7 +57,7 @@ export default function Portfolio() {
 
       <Grid container spacing={4} justifyContent="center">
         {projects.map(({ title, description, url, github }) => (
-          <Grid item xs={12} sm={10} md={6} key={title}>
+          <Grid size={{ xs: 12, sm: 10, md: 6 }} key={title}>
             <Card
               sx={{
                 bgcolor: theme.palette.background.paper + "DD",
