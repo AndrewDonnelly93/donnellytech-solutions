@@ -1,36 +1,78 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Donnelly Tech Solutions Website
+
+**Brave solutions, bold code, bright future.**
+
+This is the official website for **Donnelly Tech Solutions**, a software engineering company owned and run solely by Andrew Donnelly. Built with [Next.js](https://nextjs.org/), [Material-UI (MUI)](https://mui.com/), and [TypeScript](https://www.typescriptlang.org/), the site showcases a Gryffindor-inspired theme featuring a portfolio of projects and a contact form powered by Resend email service.
+
+---
+
+## Features
+
+- **Gryffindor-themed design:** Deep reds and golden yellows with a modern, dark mode feel.
+- **Home page:** Introduction and company tagline.
+- **Portfolio page:** Showcase of featured projects with links to live demos and source code.
+- **Contact page:** Contact form integrated with [Resend](https://resend.com/) API for sending messages.
+- **Responsive design:** Looks great on desktop and mobile.
+- **Clean TypeScript codebase** with MUI theming via a centralized theme provider.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js v16 or higher
+- npm (comes with Node.js)
+
+### Installation
+
+1. Clone the repo:
+
+````bash
+git clone https://github.com/AndrewDonnelly93/donnelly-tech-solutions.git
+cd donnelly-tech-solutions
+
+2. Install dependencies
+
+```bash
+npm install
+
+3. Setup environment variables
+
+Create a .env.local file in the root directory and add your Resend API key:
+
+env
+RESEND_API_KEY=your_resend_api_key_here
+
+4. Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Open http://localhost:3000 in your browser to see the site.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+5. Deployment
+Build the project for production:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run build
+npm start
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Folder Structure
+- **pages/ - Next.js pages including Home, Portfolio, Contact, and API routes.
 
-## Learn More
+- **src/theme.ts - MUI custom Gryffindor theme.
 
-To learn more about Next.js, take a look at the following resources:
+- **public/portfolio/ - Screenshots for portfolio projects.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **Other standard Next.js files and folders.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Contributing
+Contributions are welcome! Feel free to open issues or pull requests to improve the site.
 
-## Deploy on Vercel
+## Contact
+Andrew Donnelly
+Email: contact@donnellytech.com
+Phone: +353876072684
+LinkedIn: linkedin.com/in/andrewdonnelly93
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+````
