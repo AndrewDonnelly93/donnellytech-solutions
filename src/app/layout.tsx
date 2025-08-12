@@ -22,6 +22,10 @@ export default function RootLayout({
       <head>
         <title>Donnelly Tech Solutions — Web Development & More</title>
         <meta
+          name="google-site-verification"
+          content="59wByZ_NmG853IkSQPjqZWhvrbtnFTzJi6Q1SK9sbtw"
+        />
+        <meta
           name="description"
           content="Professional full-stack web solutions by Andrew Donnelly, using Next.js, MUI, and TypeScript. Innovative, responsive, Gryffindor-inspired design."
         />
