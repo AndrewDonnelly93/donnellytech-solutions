@@ -105,7 +105,15 @@ export default function Footer() {
         </Box>
 
         {/* Second row with GitHub link */}
-        <Box mt={1}>
+        <Box
+          mt={1}
+          component="span"
+          sx={{
+            display: "inline-flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <MuiLink
             href="https://github.com/AndrewDonnelly93"
             target="_blank"

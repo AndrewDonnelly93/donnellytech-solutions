@@ -1,4 +1,3 @@
-// src/theme.ts
 import { createTheme } from "@mui/material/styles";
 
 const theme = createTheme({
@@ -58,6 +57,25 @@ const theme = createTheme({
       fontWeight: 600,
       letterSpacing: "0.05em",
       textTransform: "uppercase",
+    },
+  },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        body: {
+          backgroundColor: "#1a1a1a", // fallback color
+          backgroundImage: `
+            linear-gradient(135deg,  rgba(127,9,9,0.9) 0%, rgba(51,0,0,0.8) 80%),
+            url("/gryffindor-pattern.jpg")
+          `,
+          backgroundBlendMode: "unset",
+          backgroundRepeat: "repeat",
+          backgroundSize: "300px 300px",
+          minHeight: "100vh",
+          margin: 0,
+          overflowX: "hidden",
+        },
+      },
     },
   },
 });

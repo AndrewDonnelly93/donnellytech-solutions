@@ -36,10 +36,8 @@ export default function Portfolio() {
       component="main"
       sx={{
         minHeight: "100vh",
-        background: `linear-gradient(135deg, ${theme.palette.primary.main} 0%, #330000 80%), url('/gryffindor-pattern.jpg')`,
-        backgroundBlendMode: "multiply",
-        backgroundRepeat: "repeat",
-        backgroundSize: "200px 200px",
+        maxWidth: "1200px !important",
+        mx: "auto", // centers horizontally
         color: theme.palette.text.primary,
         py: { xs: 4, sm: 6, md: 8 },
         px: { xs: 2, sm: 3, md: 4 },

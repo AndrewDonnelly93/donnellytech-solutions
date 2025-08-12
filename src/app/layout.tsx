@@ -7,6 +7,7 @@ import "@fontsource/merriweather";
 import "@fontsource/playfair-display";
 import { ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import { ParallaxProvider } from "react-scroll-parallax";
 import theme from "../theme";
 import Navbar from "./components/NavBar";
 import Footer from "./components/Footer";
@@ -47,10 +48,12 @@ export default function RootLayout({
 
       <body>
         <ThemeProvider theme={theme}>
-          <CssBaseline />
-          <Navbar />
-          {children}
-          <Footer />
+          <ParallaxProvider>
+            <CssBaseline />
+            <Navbar />
+            {children}
+            <Footer />
+          </ParallaxProvider>
         </ThemeProvider>
       </body>
     </html>
