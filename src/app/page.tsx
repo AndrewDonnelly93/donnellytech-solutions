@@ -14,6 +14,9 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import ThreeScene from "./components/SpinningLogoBox";
 import FadeInSection from "./components/FadeInSection";
 import WorkExperienceTimeline from "./components/WorkExperienceTimeline";
+import VolunteerExperienceTimeline from "./components/VolunteerExperienceTimeline";
+import TechStackSection from "./components/TechStackSection";
+import ServicesSection from "./components/ServicesSection";
 
 const Home = () => {
   const theme = useTheme();
@@ -134,58 +137,12 @@ const Home = () => {
           <Divider sx={{ my: 3 }} />
 
           {/* Services */}
-          <FadeInSection>
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{ fontFamily: theme.typography.h2.fontFamily }}
-            >
-              What I Do
-            </Typography>
-            <Typography variant="body1">
-              I build responsive, user-friendly websites and applications
-              tailored to your needs. For example, I recently developed a full
-              ecommerce artist portfolio for David McEwen, which included:
-            </Typography>
-            <ul>
-              <li>
-                Stripe payment integration for smooth, secure transactions
-              </li>
-              <li>Contentful CMS for easy artwork management and showcasing</li>
-              <li>Custom email notifications and contact forms</li>
-              <li>
-                Fully responsive design for seamless experiences on all devices
-              </li>
-            </ul>
-            <Typography variant="body1">
-              Whether you need a business site, portfolio, or custom web app, I
-              deliver quality solutions using modern tools like Next.js, MUI,
-              and TypeScript.
-            </Typography>
-          </FadeInSection>
+          <ServicesSection />
 
           <Divider sx={{ my: 3 }} />
 
           {/* Tech Stack */}
-          <FadeInSection>
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{ fontFamily: theme.typography.h2.fontFamily }}
-            >
-              Tech Stack
-            </Typography>
-            <Typography variant="body1" paragraph>
-              Frontend: Next.js, React, TypeScript
-              <br />
-              Backend: Node.js, Prisma, PostgreSQL
-              <br />
-              Tools: Stripe, Contentful, Resend
-              <br />
-              DevOps: Vercel, AWS CDK, GitHub Actions
-            </Typography>
-          </FadeInSection>
-
+          <TechStackSection />
           <Divider sx={{ my: 3 }} />
 
           {/* Values */}
@@ -209,6 +166,10 @@ const Home = () => {
           {/* Work Experience */}
           <Divider sx={{ my: 3 }} />
           <WorkExperienceTimeline />
+
+          {/* Volunteer Experience */}
+          <Divider sx={{ my: 3 }} />
+          <VolunteerExperienceTimeline />
 
           <FadeInSection>
             <Typography mt={3}>
