@@ -17,6 +17,7 @@ import WorkExperienceTimeline from "./components/WorkExperienceTimeline";
 import VolunteerExperienceTimeline from "./components/VolunteerExperienceTimeline";
 import TechStackSection from "./components/TechStackSection";
 import ServicesSection from "./components/ServicesSection";
+import MyValuesSection from "./components/MyValuesSection";
 
 const Home = () => {
   const theme = useTheme();
@@ -146,22 +147,7 @@ const Home = () => {
           <Divider sx={{ my: 3 }} />
 
           {/* Values */}
-          <FadeInSection>
-            <Typography
-              variant="h4"
-              gutterBottom
-              sx={{ fontFamily: theme.typography.h2.fontFamily }}
-            >
-              What I Value
-            </Typography>
-            <Typography variant="body1">
-              Accessibility-first UI design
-              <br />
-              Clear, maintainable code
-              <br />
-              Building tools that empower creatives
-            </Typography>
-          </FadeInSection>
+          <MyValuesSection />
 
           {/* Work Experience */}
           <Divider sx={{ my: 3 }} />
