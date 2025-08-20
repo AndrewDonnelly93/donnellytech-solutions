@@ -1,120 +1,124 @@
-import { Box, Typography, Chip, Stack } from "@mui/material";
-import { motion } from "framer-motion";
+import {
+  Box,
+  Typography,
+  Chip,
+  Stack,
+  useTheme,
+  useMediaQuery,
+} from "@mui/material";
 import FadeInSection from "./FadeInSection";
-import StorageIcon from "@mui/icons-material/Storage";
-import WebIcon from "@mui/icons-material/Web";
-import BuildIcon from "@mui/icons-material/Build";
-import { JSX } from "react";
+import {
+  Code as CodeIcon,
+  Storage as StorageIcon,
+  Build as BuildIcon,
+  Cloud as CloudIcon,
+  Settings as SettingsIcon,
+} from "@mui/icons-material";
 
 const techStack = {
   frontend: [
-    "Next.js",
-    "React",
-    "TypeScript",
-    "Material UI",
-    "styled-components",
+    { name: "Next.js", icon: <CodeIcon /> },
+    { name: "React", icon: <CodeIcon /> },
+    { name: "TypeScript", icon: <CodeIcon /> },
+    { name: "Material UI", icon: <BuildIcon /> },
+    { name: "styled-components", icon: <BuildIcon /> },
   ],
-  backend: ["Node.js", "Prisma"],
-  database: ["PostgreSQL"],
-  tools: ["Stripe", "Contentful", "Resend"],
-  devops: ["Jenkins", "Vercel", "AWS CDK", "GitHub Actions"],
+  backend: [
+    { name: "Node.js", icon: <CodeIcon /> },
+    { name: "Prisma", icon: <StorageIcon /> },
+  ],
+  database: [{ name: "PostgreSQL", icon: <StorageIcon /> }],
+  tools: [
+    { name: "Stripe", icon: <CloudIcon /> },
+    { name: "Contentful", icon: <CloudIcon /> },
+    { name: "Resend", icon: <CloudIcon /> },
+  ],
+  devops: [
+    { name: "Jenkins", icon: <SettingsIcon /> },
+    { name: "Vercel", icon: <CloudIcon /> },
+    { name: "AWS CDK", icon: <CloudIcon /> },
+    { name: "GitHub Actions", icon: <SettingsIcon /> },
+  ],
 };
 
-const categoryProps: Record<
-  string,
-  {
-    color: "primary" | "secondary" | "success" | "warning" | "info";
-    icon: JSX.Element;
-  }
-> = {
-  frontend: { color: "success", icon: <WebIcon /> },
-  backend: { color: "warning", icon: <StorageIcon /> },
-  database: { color: "warning", icon: <StorageIcon /> },
-  tools: { color: "info", icon: <BuildIcon /> },
-  devops: { color: "secondary", icon: <BuildIcon /> },
+// Category colours
+const categoryColors: Record<string, string> = {
+  frontend: "#1976d2", // blue
+  backend: "#388e3c", // green
+  database: "#f57c00", // orange
+  tools: "#7b1fa2", // purple
+  devops: "#d32f2f", // red
 };
 
 const TechStackSection = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <FadeInSection>
       <Typography
         variant="h4"
         gutterBottom
-        sx={{ fontFamily: (theme) => theme.typography.h2.fontFamily }}
+        sx={{ fontFamily: theme.typography.h2.fontFamily, mb: 4 }}
       >
         Tech Stack
       </Typography>
 
-      {/* Legend with animation */}
-      <Stack direction="row" spacing={2} flexWrap="wrap" sx={{ mb: 3 }}>
-        {Object.entries(categoryProps).map(([category, { color, icon }], i) => (
-          <motion.div
-            key={category}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: i * 0.2, duration: 0.5 }}
+      {Object.entries(techStack).map(([category, items]) => (
+        <Box
+          key={category}
+          sx={{
+            mb: 4,
+            pl: isMobile ? 1 : 0, // padding on mobile
+          }}
+        >
+          <Typography
+            variant="h6"
+            sx={{
+              textTransform: "capitalize",
+              mb: 2,
+              fontWeight: 600,
+              fontSize: isMobile ? "1.1rem" : "1.25rem",
+              color: categoryColors[category],
+            }}
           >
-            <Chip
-              icon={icon}
-              label={category.charAt(0).toUpperCase() + category.slice(1)}
-              color={color}
-              variant="filled"
-              sx={{
-                fontWeight: 600,
-                fontSize: "1rem",
-                height: 48,
-              }}
-            />
-          </motion.div>
-        ))}
-      </Stack>
+            {category}:
+          </Typography>
 
-      {/* Tech chips per category with staggered animation */}
-      {Object.entries(techStack).map(([category, items], catIndex) => {
-        const { color, icon } = categoryProps[category];
-        return (
-          <Box key={category} sx={{ mb: 3 }}>
-            <Typography
-              variant="h6"
-              sx={{ textTransform: "capitalize", mb: 1 }}
-            >
-              {category}:
-            </Typography>
-            <Stack direction="row" spacing={1} flexWrap="wrap">
-              {items.map((item, i) => (
-                <motion.div
-                  key={item}
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{
-                    delay: catIndex * 0.3 + i * 0.1,
-                    duration: 0.4,
-                  }}
-                >
-                  <Chip
-                    icon={icon}
-                    label={item}
-                    color={color}
-                    variant="outlined"
-                    size="medium"
-                    sx={{
-                      mb: 1,
-                      fontSize: "1rem",
-                      height: 48,
-                      "&:hover": {
-                        transform: "scale(1.05)",
-                        transition: "0.2s ease-in-out",
-                        backgroundColor: (theme) =>
-                          theme.palette[color].light + "33",
-                      },
-                    }}
-                  />
-                </motion.div>
-              ))}
-            </Stack>
-          </Box>
-        );
-      })}
+          <Stack
+            direction="row"
+            spacing={1.5}
+            flexWrap="wrap"
+            useFlexGap
+            sx={{
+              gap: isMobile ? 1.5 : 2, // even spacing between chips
+            }}
+          >
+            {items.map((item) => (
+              <Chip
+                key={item.name}
+                label={item.name}
+                icon={item.icon}
+                variant="outlined"
+                sx={{
+                  fontSize: isMobile ? "0.85rem" : "1rem",
+                  height: isMobile ? 40 : 48,
+                  borderColor: categoryColors[category],
+                  color: categoryColors[category],
+                  "& .MuiChip-icon": {
+                    color: categoryColors[category],
+                  },
+                  "&:hover": {
+                    transform: "scale(1.07)",
+                    backgroundColor: categoryColors[category] + "22",
+                    transition: "0.25s ease",
+                  },
+                }}
+              />
+            ))}
+          </Stack>
+        </Box>
+      ))}
     </FadeInSection>
   );
 };
