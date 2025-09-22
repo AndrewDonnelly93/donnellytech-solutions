@@ -1,88 +1,104 @@
-import { Box, Typography, Card, Chip, Grid } from "@mui/material";
-import FadeInSection from "../components/FadeInSection";
-import PaymentIcon from "@mui/icons-material/Payment";
-import StorageIcon from "@mui/icons-material/Storage";
-import EmailIcon from "@mui/icons-material/Email";
-import DevicesIcon from "@mui/icons-material/Devices";
+"use client";
+import { Box, Typography, Card, Grid, Button } from "@mui/material";
+import FadeInSection from "./FadeInSection";
+import Link from "next/link";
+import CodeIcon from "@mui/icons-material/Code";
+import StorefrontIcon from "@mui/icons-material/Storefront";
+import RecordVoiceOverIcon from "@mui/icons-material/RecordVoiceOver";
+import ArrowForwardIcon from "@mui/icons-material/ArrowForward";
+import { useTheme } from "@mui/material/styles";
 
-const services = [
+const coreServices = [
   {
-    title: "Stripe Payment Integration",
+    title: "Custom Web Development",
     description:
-      "Smooth, secure transactions for your ecommerce or portfolio site.",
-    icon: <PaymentIcon color="primary" />,
+      "Building bespoke, high-performance websites and applications from the ground up with modern technologies like Next.js and TypeScript.",
+    icon: <CodeIcon sx={{ fontSize: 40, color: "#F2C94C" }} />,
   },
   {
-    title: "Contentful CMS",
-    description: "Easy artwork or content management and showcasing.",
-    icon: <StorageIcon color="primary" />,
+    title: "E-commerce Solutions",
+    description:
+      "Creating secure, user-friendly online stores with full payment integration to help you sell your products and services effectively.",
+    icon: <StorefrontIcon sx={{ fontSize: 40, color: "#F2C94C" }} />,
   },
   {
-    title: "Custom Email Notifications & Forms",
+    title: "English Language Coaching",
     description:
-      "Keep in touch with users through tailored contact forms and automated emails.",
-    icon: <EmailIcon color="primary" />,
-  },
-  {
-    title: "Fully Responsive Design",
-    description:
-      "Seamless experiences on desktops, tablets, and mobile devices.",
-    icon: <DevicesIcon color="primary" />,
+      "Offering personalised, TEFL-certified coaching to help professionals and young learners achieve conversational fluency and confidence.",
+    icon: <RecordVoiceOverIcon sx={{ fontSize: 40, color: "#F2C94C" }} />,
   },
 ];
 
 const ServicesSection = () => {
+  const theme = useTheme();
+
   return (
     <FadeInSection>
       <Typography
-        variant="h4"
-        gutterBottom
-        sx={{ fontFamily: (theme) => theme.typography.h2.fontFamily, mb: 4 }}
+        variant="h3"
+        component="h2"
+        align="center"
+        sx={{
+          fontWeight: 700,
+          mb: 6,
+          color: "white",
+        }}
       >
-        What I Do
-      </Typography>
-      <Typography variant="body1" paragraph>
-        I build responsive, user-friendly websites and applications tailored to
-        your needs. For example, I recently developed a full ecommerce artist
-        portfolio for David McEwen, which included:
+        Core Services
       </Typography>
 
-      <Grid container spacing={3}>
-        {services.map((service, idx) => (
-          <Grid size={{ xs: 12, sm: 6, md: 3 }} key={idx}>
+      <Grid container spacing={4}>
+        {coreServices.map((service, idx) => (
+          <Grid size={{ xs: 12, md: 4 }} key={idx}>
             <Card
               sx={{
-                p: 2,
-                minHeight: "220px",
+                p: 3,
+                height: "100%",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
-                boxShadow: 4,
+                textAlign: "center",
+                backgroundColor: "rgba(44, 44, 44, 0.7)",
+                color: "white",
+                border: "1px solid #444",
+                boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+                transition:
+                  "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
                 "&:hover": {
-                  transform: "scale(1.03)",
-                  transition: "0.3s ease",
+                  transform: "translateY(-5px)",
+                  boxShadow: "0 12px 40px 0 rgba(242, 201, 76, 0.2)",
                 },
               }}
             >
-              <Box sx={{ display: "flex", alignItems: "center", mb: 1 }}>
-                {service.icon}
-                <Typography variant="h6" sx={{ ml: 1, fontWeight: "bold" }}>
-                  {service.title}
-                </Typography>
-              </Box>
-              <Typography variant="body2">{service.description}</Typography>
+              <Box sx={{ mb: 2 }}>{service.icon}</Box>
+              <Typography variant="h5" sx={{ fontWeight: "bold", mb: 2 }}>
+                {service.title}
+              </Typography>
+              <Typography variant="body1" sx={{ color: "#ccc" }}>
+                {service.description}
+              </Typography>
             </Card>
           </Grid>
         ))}
       </Grid>
 
-      <Typography variant="body1" sx={{ mt: 4 }}>
-        Whether you need a business site, portfolio, or custom web app, I
-        deliver quality solutions using modern tools like{" "}
-        <Chip label="Next.js" color="primary" size="small" sx={{ mr: 1 }} />,{" "}
-        <Chip label="MUI" color="primary" size="small" sx={{ mr: 1 }} />, and{" "}
-        <Chip label="TypeScript" color="primary" size="small" />.
-      </Typography>
+      <Box sx={{ textAlign: "center", mt: 6 }}>
+        <Link href="/services" passHref>
+          <Button
+            variant="contained"
+            color="secondary"
+            size="large"
+            endIcon={<ArrowForwardIcon />}
+            sx={{
+              fontWeight: "bold",
+              fontSize: "1.1rem",
+              py: 1.5,
+              px: 4,
+            }}
+          >
+            Explore All Services
+          </Button>
+        </Link>
+      </Box>
     </FadeInSection>
   );
 };

@@ -5,87 +5,90 @@ import {
   Card,
   CardContent,
   Typography,
-  Chip,
   List,
   ListItem,
   Grid,
 } from "@mui/material";
-import { motion } from "framer-motion";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { useTheme, useMediaQuery } from "@mui/material";
-import { Parallax } from "react-scroll-parallax";
 
-interface Job {
+interface TimelineEvent {
   role: string;
-  company: string;
+  organization: string;
   date: string;
   points: string[];
 }
 
-const jobs: Job[] = [
+const workEvents: TimelineEvent[] = [
   {
-    role: "Business Owner | Software Engineer",
-    company: "Donnelly Tech Solutions",
+    role: "Business Owner | Full-Stack Developer",
+    organization: "Donnelly Tech Solutions",
     date: "Aug 2024 – Present",
     points: [
-      "Running my own software development company delivering custom web applications directly to clients.",
-      "Improving client workflows and automating manual tasks, reducing operational overhead by up to 30%.",
-      "Hands-on full-stack development using React (frontend), Node.js (backend), and TypeScript.",
-      "Manage client communication, timelines, and technical strategy.",
+      "Partner directly with clients to design, build, and deploy custom web applications from concept to launch.",
+      "Automate client workflows and reduce manual overhead by up to 30% through custom software solutions.",
+      "Lead full-stack development using a modern tech stack including React, Next.js, Node.js, and TypeScript.",
+      "Manage the complete project lifecycle, from initial client communication to final technical strategy and delivery.",
     ],
   },
   {
     role: "Software Engineer",
-    company: "Glesk Management Limited",
+    organization: "Glesk Management Limited",
     date: "Oct 2022 – Aug 2024",
     points: [
-      "Worked on insurance and mental health platforms supporting European clients.",
-      "Introduced automated code quality checks and styled-components for consistent UI.",
-      "Mentored junior developers through pair programming sessions and knowledge sharing.",
-      "Technologies: React, Redux, styled-components, Firebase, Node.js, REST APIs.",
+      "Engineered and maintained features for high-traffic insurance and mental health platforms serving European clients.",
+      "Enhanced UI consistency and code quality by implementing styled-components and automated code checks.",
+      "Mentored and upskilled junior developers through targeted pair programming and knowledge-sharing sessions.",
     ],
   },
   {
     role: "Software Engineer",
-    company: "Knowledge City",
+    organization: "Knowledge City",
     date: "Dec 2021 – Sept 2022",
     points: [
-      "Developed UI features and refactored legacy code on an online educational platform.",
-      "Created a flexible certificate template editor using fabricJS.",
-      "Improved codebase stability by refactoring and modularizing legacy components.",
-      "Collaborated with product owners and designers to align development with user needs.",
+      "Developed key UI features for an online educational platform, improving user engagement and functionality.",
+      "Architected a flexible certificate template editor with fabricJS, empowering users to create custom designs.",
+      "Increased application stability and performance by refactoring and modularising legacy components.",
     ],
   },
   {
     role: "Software Engineer",
-    company: "Ocuco Limited",
+    organization: "Ocuco Limited",
     date: "Jan 2021 – Aug 2021",
     points: [
-      "Built software managing optician workflows, appointments, and patient data.",
-      "Delivered reusable UI components and improved data flow using React, TypeScript, and Redux.",
-      "Contributed to CI/CD pipelines with Azure DevOps.",
-      "Worked closely with QA and business analysts to deliver high-quality features on time.",
+      "Delivered a library of reusable UI components with React and TypeScript, accelerating future development.",
+      "Strengthened deployment processes by contributing to CI/CD pipelines with Azure DevOps.",
+      "Ensured high-quality feature delivery by working closely with QA and business analysts on software for the optical industry.",
     ],
   },
   {
     role: "Software Engineer",
-    company: "Viasat Europe Limited",
+    organization: "Viasat Europe Limited",
     date: "Jan 2020 – Dec 2020",
     points: [
-      "Created a portal builder app allowing non-technical users to prototype in-flight entertainment systems.",
-      "Developed UI components like Banner, Weather, and Video Player.",
-      "Implemented CI/CD workflows with Jenkins and Docker.",
-      "Participated in environment simulation features for robust testing.",
+      "Spearheaded the creation of a portal builder app that enabled non-technical users to prototype in-flight entertainment systems.",
+      "Built dynamic UI components for in-flight experiences, including weather, video players, and banners.",
+      "Implemented and managed CI/CD workflows with Jenkins and Docker to automate testing and deployment.",
     ],
   },
   {
     role: "Software Engineer",
-    company: "NRGSOFT",
+    organization: "NRGSOFT",
     date: "Mar 2017 – Jan 2020",
     points: [
-      "Worked on an e-assessment platform supporting diverse question types and workflows.",
-      "Developed new question types including code editors and mathematical assignment tools.",
-      "Collaborated with front-end, back-end, and design teams.",
-      "Used Redux-Saga for managing complex asynchronous flows.",
+      "Contributed to a large-scale e-assessment platform, supporting a wide variety of question types and workflows.",
+      "Developed complex, specialised assessment tools, including integrated code editors and mathematical editors.",
+      "Managed complex asynchronous data flows and application state effectively using Redux-Saga.",
+    ],
+  },
+  {
+    role: "Copywriter & Content Strategist",
+    organization: "Internet Open & Freelance",
+    date: "2011 – 2015",
+    points: [
+      "Crafted compelling, SEO-optimised copy for a diverse range of clients in sectors including law, manufacturing, and retail.",
+      "Translated complex product features and legal jargon into clear, benefit-driven content for websites and marketing materials.",
+      "Developed a strong foundation in communication, which now informs my ability to write clear documentation and collaborate effectively with non-technical stakeholders.",
     ],
   },
 ];
@@ -94,106 +97,112 @@ export default function WorkExperienceTimeline() {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
+  const { scrollYProgress } = useScroll();
+  const scaleY = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
+
   return (
-    <Box sx={{ position: "relative", py: 8 }}>
-      {/* Heading */}
+    <Box sx={{ position: "relative", py: 8, px: 2 }}>
       <Typography
-        variant="h3"
-        component="h2"
+        variant="h2"
+        component="h1"
         align="center"
+        gutterBottom
+        sx={{ fontWeight: "bold", color: "white", mb: 8 }}
+      >
+        Professional Experience
+      </Typography>
+
+      {/* The timeline line, now positioned on the left for mobile */}
+      <Box
         sx={{
-          fontWeight: 700,
-          mb: 6,
-          color: theme.palette.text.primary,
-          letterSpacing: 1.5,
+          position: "absolute",
+          top: "120px",
+          bottom: 0,
+          left: "20px", // Keep it on the left for a cleaner single-column look
+          width: "4px",
+          backgroundColor: "#333",
+          zIndex: 0,
         }}
       >
-        Work Experience
-      </Typography>
-      {/* Parallax timeline line */}
-      <Parallax speed={-10}>
-        <Box
-          sx={{
-            position: "absolute",
-            top: 0,
-            left: isMobile ? "20px" : "50%",
-            transform: isMobile ? "none" : "translateX(-50%)",
-            width: "4px",
+        <motion.div
+          style={{
+            scaleY,
             height: "100%",
-            backgroundColor: theme.palette.primary.main,
-            borderRadius: 2,
+            width: "100%",
+            backgroundColor: theme.palette.secondary.main,
+            transformOrigin: "top",
           }}
         />
-      </Parallax>
+      </Box>
 
-      {jobs.map((job, i) => {
-        const isEven = i % 2 === 0;
-        return (
-          <Grid
-            container
-            key={i}
-            justifyContent={
-              isMobile ? "flex-start" : isEven ? "flex-end" : "flex-start"
-            }
-            sx={{ mb: 8 }}
-          >
-            <Grid size={{ xs: 12, sm: 7, md: 6 }}>
+      {/* Container for the timeline items */}
+      <Box sx={{ maxWidth: 900, mx: "auto" }}>
+        {workEvents.map((event, i) => {
+          return (
+            <Box
+              key={i}
+              sx={{
+                mb: 4,
+                position: "relative",
+                zIndex: 1,
+                pl: isMobile ? "40px" : 0, // Add padding to not overlap the line on mobile
+              }}
+            >
               <motion.div
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: i * 0.1 }}
+                transition={{ duration: 0.6, delay: 0.2 }}
               >
                 <Card
                   sx={{
-                    backgroundColor: "background.paper",
-                    boxShadow: 4,
+                    p: 3,
+                    backgroundColor: "rgba(44, 44, 44, 0.9)",
+                    color: "white",
+                    border: "1px solid #444",
+                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
+                    transition:
+                      "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
                     "&:hover": {
-                      transform: "scale(1.02)",
-                      transition: "0.3s ease",
+                      transform: "translateY(-5px)",
+                      boxShadow: "0 12px 40px 0 rgba(242, 201, 76, 0.2)",
                     },
-                    p: 2,
-                    borderRadius: 2,
                   }}
                 >
-                  <CardContent sx={{ fontSize: "1.1rem" }}>
+                  <CardContent>
                     <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
-                      {job.role}
+                      {event.role}
                     </Typography>
                     <Typography
                       variant="subtitle1"
                       sx={{
-                        color: theme.palette.text.primary, // Use primary text color, usually brighter
+                        color: theme.palette.secondary.light,
                         fontWeight: 600,
-                        fontSize: "1.3rem", // bigger font size
                         mb: 1,
                       }}
                     >
-                      {job.company}
+                      {event.organization}
                     </Typography>
-                    <Chip
-                      label={job.date}
-                      size="medium"
-                      sx={{
-                        mt: 1,
-                        mb: 2,
-                        fontWeight: 600,
-                        fontSize: "1.2rem",
-                        backgroundColor: theme.palette.primary.light + "DD", // subtle bg for chip to pop
-                        color: theme.palette.primary.contrastText,
-                      }}
-                    />
-                    <List sx={{ pl: 2, pr: 2 }}>
-                      {job.points.map((point, idx) => (
+                    <Typography
+                      variant="body2"
+                      sx={{ color: "#ccc", fontStyle: "italic", mb: 2 }}
+                    >
+                      {event.date}
+                    </Typography>
+                    <List sx={{ p: 0 }}>
+                      {event.points.map((point, idx) => (
                         <ListItem
                           key={idx}
                           sx={{
-                            p: 0,
                             display: "list-item",
-                            listStyleType: "disc", // make sure bullet is disc
-                            ml: 2,
-                            mr: 2,
-                            mb: 1.5,
+                            listStyleType: "disc",
+                            pl: 2,
+                            p: 0,
+                            mb: 1,
                           }}
                         >
                           <Typography variant="body1">{point}</Typography>
@@ -203,10 +212,10 @@ export default function WorkExperienceTimeline() {
                   </CardContent>
                 </Card>
               </motion.div>
-            </Grid>
-          </Grid>
-        );
-      })}
+            </Box>
+          );
+        })}
+      </Box>
     </Box>
   );
 }

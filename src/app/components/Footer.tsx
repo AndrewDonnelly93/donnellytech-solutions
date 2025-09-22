@@ -152,6 +152,25 @@ export default function Footer() {
         >
           Portfolio
         </MuiLink>
+        
+        {/* Separator */}
+        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+          |
+        </Box>
+
+        <MuiLink
+          href="/about"
+          sx={{
+            color: theme.palette.secondary.main,
+            textDecoration: "underline",
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.dark || "#b38b00",
+            },
+          }}
+        >
+          About
+        </MuiLink>
 
         {/* Separator */}
         <Box component="span" sx={{ color: theme.palette.secondary.main }}>
