@@ -163,7 +163,7 @@ const ContactPage = () => {
           textAlign: { xs: "center", sm: "left" },
         }}
       >
-        If you have any questions or would like to order a website from Andrew
+        If you have any questions or would like to order a website or would like to get English lessons from Andrew
         Donnelly, please fill out the form below.
       </Typography>
 

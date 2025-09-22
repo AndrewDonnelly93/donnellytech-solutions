@@ -42,6 +42,23 @@ const Navbar = () => {
           <Button
             color="inherit"
             component={Link}
+            href="/services"
+            sx={{
+              textTransform: "uppercase",
+              fontWeight: 600,
+              mr: 2,
+              transition: "color 0.3s ease, transform 0.2s ease",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+                transform: "scale(1.05)",
+              },
+            }}
+          >
+            Services
+          </Button>
+          <Button
+            color="inherit"
+            component={Link}
             href="/portfolio"
             sx={{
               textTransform: "uppercase",

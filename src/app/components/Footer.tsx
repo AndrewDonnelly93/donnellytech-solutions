@@ -25,7 +25,7 @@ export default function Footer() {
       <Typography>
         📞 <strong>+353 87 607 26 84</strong> |{" "}
         <MuiLink
-          href="mailto:andrew.donnelly.1403@gmail.com"
+          href="mailto:andrew@donnellytechsolutions.co.uk"
           sx={{
             color: theme.palette.secondary.main,
             textDecoration: "underline",
@@ -35,7 +35,7 @@ export default function Footer() {
             },
           }}
         >
-          andrew.donnelly.1403@gmail.com
+          andrew@donnellytechsolutions.co.uk
         </MuiLink>
       </Typography>
 
@@ -49,6 +49,23 @@ export default function Footer() {
             alignItems: "center",
           }}
         >
+          <MuiLink
+            href="/services"
+            sx={{
+              color: theme.palette.secondary.main,
+              textDecoration: "underline",
+              mx: 1,
+              transition: "color 0.3s ease",
+              "&:hover": {
+                color: theme.palette.secondary.dark || "#b38b00",
+              },
+            }}
+          >
+            Services
+          </MuiLink>
+          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+            |
+          </Box>
           <MuiLink
             href="/portfolio"
             sx={{
@@ -80,9 +97,18 @@ export default function Footer() {
           >
             Contact
           </MuiLink>
-          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-            |
-          </Box>
+        </Box>
+
+        {/* Second row with GitHub link */}
+        <Box
+          mt={{ xs: 1, sm: 0 }}
+          component="span"
+          sx={{
+            display: "inline-flex",
+            flexWrap: "wrap",
+            alignItems: "center",
+          }}
+        >
           <MuiLink
             href="https://www.linkedin.com/in/andrewdonnelly93/"
             target="_blank"
@@ -102,18 +128,10 @@ export default function Footer() {
             <LinkedInIcon sx={{ mr: 0.5 }} />
             LinkedIn
           </MuiLink>
-        </Box>
+          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+            |
+          </Box>
 
-        {/* Second row with GitHub link */}
-        <Box
-          mt={1}
-          component="span"
-          sx={{
-            display: "inline-flex",
-            flexWrap: "wrap",
-            alignItems: "center",
-          }}
-        >
           <MuiLink
             href="https://github.com/AndrewDonnelly93"
             target="_blank"
