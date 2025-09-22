@@ -39,120 +39,140 @@ export default function Footer() {
         </MuiLink>
       </Typography>
 
-      <Typography mt={1}>
-        {/* First row with three links */}
+      {/* Single flex container for all links to ensure perfect alignment */}
+      <Box
+        sx={{
+          display: "flex",
+          flexWrap: "wrap",
+          justifyContent: "center",
+          alignItems: "center",
+          mt: 2,
+          gap: 1, // Handles spacing between all items
+        }}
+      >
+        {/* Social Link: LinkedIn */}
+        <MuiLink
+          href="https://www.linkedin.com/in/andrewdonnelly93/"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            color: theme.palette.secondary.main,
+            textDecoration: "none",
+            py: 0.5,
+            px: 1.5,
+            borderRadius: "16px",
+            border: "1px solid transparent",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.light,
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderColor: theme.palette.secondary.main,
+            },
+          }}
+        >
+          <LinkedInIcon sx={{ mr: 0.5 }} />
+          LinkedIn
+        </MuiLink>
+
+        {/* Separator */}
+        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+          |
+        </Box>
+
+        {/* Social Link: GitHub */}
+        <MuiLink
+          href="https://github.com/AndrewDonnelly93"
+          target="_blank"
+          rel="noopener noreferrer"
+          sx={{
+            display: "inline-flex",
+            alignItems: "center",
+            color: theme.palette.secondary.main,
+            textDecoration: "none",
+            py: 0.5,
+            px: 1.5,
+            borderRadius: "16px",
+            border: "1px solid transparent",
+            transition: "all 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.light,
+              backgroundColor: "rgba(255, 255, 255, 0.1)",
+              borderColor: theme.palette.secondary.main,
+            },
+          }}
+        >
+          <GitHubIcon sx={{ mr: 0.5 }} />
+          GitHub
+        </MuiLink>
+
+        {/* Separator */}
         <Box
           component="span"
           sx={{
-            display: "inline-flex",
-            flexWrap: "wrap",
-            alignItems: "center",
+            color: theme.palette.secondary.main,
+            display: { xs: "none", sm: "inline" },
           }}
         >
-          <MuiLink
-            href="/services"
-            sx={{
-              color: theme.palette.secondary.main,
-              textDecoration: "underline",
-              mx: 1,
-              transition: "color 0.3s ease",
-              "&:hover": {
-                color: theme.palette.secondary.dark || "#b38b00",
-              },
-            }}
-          >
-            Services
-          </MuiLink>
-          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-            |
-          </Box>
-          <MuiLink
-            href="/portfolio"
-            sx={{
-              color: theme.palette.secondary.main,
-              textDecoration: "underline",
-              mx: 1,
-              transition: "color 0.3s ease",
-              "&:hover": {
-                color: theme.palette.secondary.dark || "#b38b00",
-              },
-            }}
-          >
-            Portfolio
-          </MuiLink>
-          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-            |
-          </Box>
-          <MuiLink
-            href="/contact"
-            sx={{
-              color: theme.palette.secondary.main,
-              textDecoration: "underline",
-              mx: 1,
-              transition: "color 0.3s ease",
-              "&:hover": {
-                color: theme.palette.secondary.dark || "#b38b00",
-              },
-            }}
-          >
-            Contact
-          </MuiLink>
+          |
         </Box>
 
-        {/* Second row with GitHub link */}
-        <Box
-          mt={{ xs: 1, sm: 0 }}
-          component="span"
+        {/* Page Link: Services */}
+        <MuiLink
+          href="/services"
           sx={{
-            display: "inline-flex",
-            flexWrap: "wrap",
-            alignItems: "center",
+            color: theme.palette.secondary.main,
+            textDecoration: "underline",
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.dark || "#b38b00",
+            },
           }}
         >
-          <MuiLink
-            href="https://www.linkedin.com/in/andrewdonnelly93/"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              color: theme.palette.secondary.main,
-              textDecoration: "underline",
-              mx: 1,
-              transition: "color 0.3s ease",
-              display: "inline-flex",
-              alignItems: "center",
-              "&:hover": {
-                color: theme.palette.secondary.dark || "#b38b00",
-              },
-            }}
-          >
-            <LinkedInIcon sx={{ mr: 0.5 }} />
-            LinkedIn
-          </MuiLink>
-          <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-            |
-          </Box>
+          Services
+        </MuiLink>
 
-          <MuiLink
-            href="https://github.com/AndrewDonnelly93"
-            target="_blank"
-            rel="noopener noreferrer"
-            sx={{
-              color: theme.palette.secondary.main,
-              textDecoration: "underline",
-              mx: 1,
-              transition: "color 0.3s ease",
-              display: "inline-flex",
-              alignItems: "center",
-              "&:hover": {
-                color: theme.palette.secondary.dark || "#b38b00",
-              },
-            }}
-          >
-            <GitHubIcon sx={{ mr: 0.5 }} />
-            GitHub
-          </MuiLink>
+        {/* Separator */}
+        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+          |
         </Box>
-      </Typography>
+
+        {/* Page Link: Portfolio */}
+        <MuiLink
+          href="/portfolio"
+          sx={{
+            color: theme.palette.secondary.main,
+            textDecoration: "underline",
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.dark || "#b38b00",
+            },
+          }}
+        >
+          Portfolio
+        </MuiLink>
+
+        {/* Separator */}
+        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
+          |
+        </Box>
+
+        {/* Page Link: Contact */}
+        <MuiLink
+          href="/contact"
+          sx={{
+            color: theme.palette.secondary.main,
+            textDecoration: "underline",
+            transition: "color 0.3s ease",
+            "&:hover": {
+              color: theme.palette.secondary.dark || "#b38b00",
+            },
+          }}
+        >
+          Contact
+        </MuiLink>
+      </Box>
     </Box>
   );
 }
