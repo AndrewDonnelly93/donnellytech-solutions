@@ -25,7 +25,7 @@ export default function Footer() {
       <Typography>
         📞 <strong>+353 87 607 26 84</strong> |{" "}
         <MuiLink
-          href="mailto:andrew@donnellytechsolutions.co.uk"
+          href="mailto:andrew.donnelly.1403@gmail.com"
           sx={{
             color: theme.palette.secondary.main,
             textDecoration: "underline",
@@ -35,7 +35,7 @@ export default function Footer() {
             },
           }}
         >
-          andrew@donnellytechsolutions.co.uk
+          andrew.donnelly.1403@gmail.com
         </MuiLink>
       </Typography>
 
@@ -152,7 +152,7 @@ export default function Footer() {
         >
           Portfolio
         </MuiLink>
-        
+
         {/* Separator */}
         <Box component="span" sx={{ color: theme.palette.secondary.main }}>
           |

@@ -23,7 +23,7 @@ const projects = [
     title: "Trish Bourke Therapy",
     description:
       "A simple informational website for a therapist with blog features, built with React and styled with MUI.",
-    url: "https://www.trishbourke-therapy.ie/",
+    url: "https://therapy-app-git-main-andrew-donnellys-projects.vercel.app/",
     github: "https://github.com/AndrewDonnelly93/therapy-app",
   },
 ];
