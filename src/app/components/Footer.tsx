@@ -23,16 +23,16 @@ export default function Footer() {
       </Typography>
       <Typography gutterBottom>All rights reserved.</Typography>
       <Typography>
-        📞 <strong>+353 87 607 26 84</strong> |{" "}
+        📞 <strong>+44 7345 815239</strong> |{" "}
         <MuiLink
-          href="mailto:andrew.donnelly.1403@gmail.com"
+          href="mailto:andrew@donnellytechsolutions.co.uk"
           sx={{
             color: vars.primaryMain,
             textDecoration: "underline",
             "&:hover": { color: vars.primaryDark },
           }}
         >
-          andrew.donnelly.1403@gmail.com
+          andrew@donnellytechsolutions.co.uk
         </MuiLink>
       </Typography>
 
@@ -96,19 +96,6 @@ export default function Footer() {
         >
           <GitHubIcon sx={{ mr: 0.5 }} />
           GitHub
-        </MuiLink>
-
-        <Box component="span" sx={{ color: vars.divider, display: { xs: "none", sm: "inline" } }}>|</Box>
-
-        <MuiLink
-          href="/#contact"
-          sx={{
-            color: vars.textSecondary,
-            textDecoration: "underline",
-            "&:hover": { color: vars.primaryMain },
-          }}
-        >
-          Contact
         </MuiLink>
       </Box>
     </Box>
