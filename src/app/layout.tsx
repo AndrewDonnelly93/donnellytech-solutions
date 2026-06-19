@@ -1,17 +1,20 @@
-"use client";
 import React from "react";
+import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+import InitColorSchemeScript from "@mui/material/InitColorSchemeScript";
 import "./globals.css";
-import "@fontsource/cormorant-garamond";
-import "@fontsource/im-fell-english";
-import "@fontsource/merriweather";
-import "@fontsource/playfair-display";
-import { ThemeProvider } from "@mui/material/styles";
-import CssBaseline from "@mui/material/CssBaseline";
-import { ParallaxProvider } from "react-scroll-parallax";
-import theme from "../theme";
-import Navbar from "./components/NavBar";
-import Footer from "./components/Footer";
-import { Analytics } from "@vercel/analytics/next";
+import Providers from "./Providers";
+
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
+
+export const metadata: Metadata = {
+  title: "Donnelly Tech Solutions — Web Development & More",
+  description:
+    "Donnelly Tech Solutions — full-stack web development specialising in fintech, logistics, e-commerce, mobile apps, and microservices.",
+  verification: {
+    google: "59wByZ_NmG853IkSQPjqZWhvrbtnFTzJi6Q1SK9sbtw",
+  },
+};
 
 export default function RootLayout({
   children,
@@ -19,48 +22,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={inter.variable} suppressHydrationWarning>
       <head>
-        <title>Donnelly Tech Solutions — Web Development & More</title>
-        <meta
-          name="google-site-verification"
-          content="59wByZ_NmG853IkSQPjqZWhvrbtnFTzJi6Q1SK9sbtw"
-        />
-        <meta
-          name="description"
-          content="Professional full-stack web solutions by Andrew Donnelly, using Next.js, MUI, and TypeScript. Innovative, responsive, Gryffindor-inspired design."
-        />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="apple-touch-icon"
-          sizes="180x180"
-          href="/apple-touch-icon.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="32x32"
-          href="/favicon-32x32.png"
-        />
-        <link
-          rel="icon"
-          type="image/png"
-          sizes="16x16"
-          href="/favicon-16x16.png"
-        />
+        <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
       </head>
-
       <body>
-        <ThemeProvider theme={theme}>
-          <ParallaxProvider>
-            <CssBaseline />
-            <Navbar />
-            {children}
-            <Analytics />
-            <Footer />
-          </ParallaxProvider>
-        </ThemeProvider>
+        <InitColorSchemeScript attribute="data" defaultMode="dark" />
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

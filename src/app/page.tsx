@@ -1,144 +1,250 @@
 "use client";
-import React from "react";
-import {
-  useTheme,
-  Box,
-  Typography,
-  Button,
-  Link as MuiLink,
-  Divider,
-} from "@mui/material";
-import Link from "next/link";
-import ThreeScene from "./components/SpinningLogoBox";
+import React, { useEffect } from "react";
+import Image from "next/image";
+import { Box, Typography, Button, Divider, Grid } from "@mui/material";
+import HeroIntro from "./components/HeroIntro";
 import FadeInSection from "./components/FadeInSection";
 import WorkExperienceTimeline from "./components/WorkExperienceTimeline";
 import VolunteerExperienceTimeline from "./components/VolunteerExperienceTimeline";
-import TechStackSection from "./components/TechStackSection";
 import ServicesSection from "./components/ServicesSection";
-import MyValuesSection from "./components/MyValuesSection";
+import TailoredFeedbackSection from "./components/TailoredFeedbackSection";
+import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
+import { vars } from "../themeVars";
 
-const ctaButtons = [
-  { href: "/services", text: "My Services", variant: "contained" as const },
-  { href: "/portfolio", text: "View Portfolio", variant: "contained" as const },
-  { href: "/about", text: "About Me", variant: "outlined" as const },
-  { href: "/contact", text: "Contact Me", variant: "outlined" as const },
+const CALENDLY_BOOK_CALL_URL = "https://calendly.com/andrew-donnellytechsolutions/30min";
+
+const stats = [
+  { value: "30+", label: "Projects Delivered" },
+  { value: "10", label: "Years Experience" },
+  { value: "3", label: "Industry Domains" },
+];
+
+const roleTags = [
+  "Full-Stack Engineer",
+  "Frontend Engineer",
+  "Backend Engineer",
+  "Cloud Architect",
 ];
 
 const Home = () => {
-  const theme = useTheme();
+  useEffect(() => {
+    const hash = window.location.hash;
+    if (!hash) return;
+    const el = document.querySelector(hash);
+    if (el) {
+      setTimeout(() => el.scrollIntoView({ behavior: "smooth" }), 100);
+    }
+  }, []);
 
   return (
-    <Box sx={{ width: "100%", color: theme.palette.text.primary }}>
-      {/* --- HERO SECTION --- */}
+    <Box sx={{ width: "100%", color: vars.textPrimary, position: "relative", zIndex: 1 }}>
+
       <Box
-        component="main"
+        id="about"
+        component="section"
         sx={{
-          minHeight: "100vh",
-          maxWidth: "1200px !important",
-          mx: "auto", // centers horizontally
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          alignItems: "center",
-          px: { xs: 2, sm: 3, md: 4 },
-          textAlign: "center",
+          scrollMarginTop: "80px",
+          pt: "30px",
         }}
       >
-        <FadeInSection>
-          <Typography
-            variant="h2"
-            fontWeight="bold"
-            gutterBottom
-            sx={{ letterSpacing: "0.08em", mb: { xs: 2, sm: 3 }, mt: 2 }}
-          >
-            Donnelly Tech Solutions
-          </Typography>
-        </FadeInSection>
+        <Box sx={{ maxWidth: 1200, mx: "auto", px: { xs: 3, md: 6 }, pb: { xs: 8, md: 10 } }}>
+          <FadeInSection>
+            <Grid container spacing={{ xs: 3, md: 4 }} alignItems="flex-start">
+              <Grid size={{ xs: 12, md: 7 }}>
+                <HeroIntro />
 
-        <FadeInSection>
-          <ThreeScene />
-        </FadeInSection>
+                <Typography
+                  variant="body1"
+                  sx={{
+                    color: vars.textSecondary,
+                    lineHeight: 1.9,
+                    mt: { xs: 1.5, md: 2 },
+                    mb: 4,
+                    fontSize: { xs: "0.98rem", md: "1.05rem" },
+                  }}
+                >
+                  Hello! I&apos;m Andrew Donnelly, a senior full-stack engineer with 10+ years of experience
+                  specialising in React, Next.js, Angular, TypeScript, NestJS, FastAPI, and ASP.NET. I partner
+                  with fintech, logistics, and wellness businesses to ship production-ready products — from
+                  Stripe and Web3 payment flows to AI-powered fleet platforms and React Native studio apps,
+                  built on microservices, microfrontends, and cloud infrastructure across AWS, Azure, and GCP.
+                </Typography>
 
-        {/* --- NEW HEADLINE / TAGLINE --- */}
-        <FadeInSection>
-          <Typography
-            variant="h4"
-            component="h2"
-            sx={{
-              mt: { xs: 4, sm: 5 }, // FIXED: Added margin-top for spacing
-              mb: { xs: 3, sm: 4 },
-              textAlign: "center",
-              color: theme.palette.secondary.light, // Use the accent color
-              fontWeight: 500,
-              maxWidth: "800px",
-              mx: "auto", // FIXED: Ensure horizontal centering
-            }}
-          >
-            Building High-Performance Web Applications That Drive Business
-            Growth.
-          </Typography>
-        </FadeInSection>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 1.5, mb: 5 }}>
+                  {roleTags.map((role) => (
+                    <Box
+                      key={role}
+                      sx={{
+                        px: 2,
+                        py: 0.75,
+                        borderRadius: "999px",
+                        border: `1px solid ${vars.border}`,
+                        color: vars.textSecondary,
+                        fontSize: "0.82rem",
+                        fontWeight: 500,
+                      }}
+                    >
+                      {role}
+                    </Box>
+                  ))}
+                </Box>
 
-        {/* --- NEW INTRODUCTORY PARAGRAPH --- */}
-        <FadeInSection>
-          <Typography
-            variant="h6"
-            component="p"
-            maxWidth={750}
-            mb={6}
-            sx={{ mx: "auto", color: "#ccc", lineHeight: 1.7 }}
-          >
-            Hi, I am Andrew. I build practical, high-performance web solutions
-            that deliver real results. As a full-stack developer specializing in
-            React, Next.js, and TypeScript, I partner with businesses to create
-            fast, scalable, and maintainable applications. My passion is
-            transforming complex technical challenges into user-friendly digital
-            experiences that help my clients succeed.
-          </Typography>
-        </FadeInSection>
+                <Box sx={{ display: "flex", flexWrap: "wrap", gap: 2, mb: 6 }}>
+                  <Button variant="contained" color="primary" size="large" component="a" href="#work" sx={{ px: 4, py: 1.5, fontWeight: 700 }}>
+                    View My Work
+                  </Button>
+                  <Button
+                    variant="outlined"
+                    size="large"
+                    component="a"
+                    href={CALENDLY_BOOK_CALL_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    startIcon={<CalendarMonthIcon />}
+                    sx={{
+                      px: 4,
+                      py: 1.5,
+                      borderColor: vars.border,
+                      color: vars.textPrimary,
+                      "&:hover": {
+                        borderColor: vars.primaryMain,
+                        color: vars.primaryMain,
+                        backgroundColor: "color-mix(in srgb, var(--mui-palette-primary-main) 10%, transparent)",
+                      },
+                    }}
+                  >
+                    Book a Call
+                  </Button>
+                </Box>
+
+                <Box sx={{ display: "flex", gap: { xs: 3, md: 5 }, flexWrap: "wrap" }}>
+                  {stats.map((stat) => (
+                    <Box key={stat.label}>
+                      <Typography
+                        sx={{
+                          fontSize: { xs: "1.6rem", md: "2rem" },
+                          fontWeight: 800,
+                          background: vars.accentGradient,
+                          WebkitBackgroundClip: "text",
+                          WebkitTextFillColor: "transparent",
+                          backgroundClip: "text",
+                          lineHeight: 1,
+                          mb: 0.5,
+                        }}
+                      >
+                        {stat.value}
+                      </Typography>
+                      <Typography variant="body2" sx={{ color: vars.textSecondary, fontSize: "0.82rem" }}>
+                        {stat.label}
+                      </Typography>
+                    </Box>
+                  ))}
+                </Box>
+              </Grid>
+
+              <Grid size={{ xs: 12, md: 5 }}>
+                <Box
+                  sx={{
+                    position: "relative",
+                    mx: { xs: "auto", md: 0 },
+                    ml: { md: "auto" },
+                    maxWidth: 360,
+                    p: "3px",
+                    borderRadius: "20px",
+                    background: vars.accentGradient,
+                  }}
+                >
+                  <Box
+                    sx={{
+                      position: "relative",
+                      borderRadius: "18px",
+                      overflow: "hidden",
+                      aspectRatio: "3 / 4",
+                      bgcolor: vars.surface,
+                    }}
+                  >
+                    <Image
+                      src="/donnelly-tech-solutions.jpg"
+                      alt="Andrew Donnelly"
+                      fill
+                      sizes="(max-width: 900px) 100vw, 360px"
+                      style={{ objectFit: "cover" }}
+                      priority
+                    />
+                  </Box>
+                </Box>
+              </Grid>
+            </Grid>
+          </FadeInSection>
+        </Box>
+      </Box>
+
+      <Box sx={{ maxWidth: 1200, mx: "auto", px: { xs: 3, md: 6 }, pb: 12, position: "relative", zIndex: 1 }}>
+        <Box
+          id="work"
+          component="section"
+          sx={{
+            py: { xs: 6, md: 10 },
+            borderTop: `1px solid ${vars.divider}`,
+            scrollMarginTop: "80px",
+          }}
+        >
+          <ServicesSection />
+        </Box>
+
+        <Divider />
+
+        <Box component="section" sx={{ py: { xs: 6, md: 10 } }}>
+          <TailoredFeedbackSection />
+        </Box>
+
+        <Divider />
+
+        <Box component="section" sx={{ py: { xs: 6, md: 10 } }}>
+          <WorkExperienceTimeline />
+        </Box>
+
+        <Divider />
+
+        <Box component="section" sx={{ py: { xs: 6, md: 10 } }}>
+          <VolunteerExperienceTimeline />
+        </Box>
 
         <FadeInSection>
           <Box
+            id="contact"
+            component="section"
             sx={{
-              display: "flex",
-              flexWrap: "wrap",
-              justifyContent: "center",
-              gap: 2,
-              mb: { xs: 6, sm: 8 },
+              mt: 6,
+              p: { xs: 5, md: 8 },
+              borderRadius: "24px",
+              background: vars.ctaGradient,
+              border: "1px solid color-mix(in srgb, var(--mui-palette-primary-main) 20%, transparent)",
+              textAlign: "center",
+              scrollMarginTop: "80px",
             }}
           >
-            {ctaButtons.map((button) => (
-              <Link href={button.href} passHref key={button.text}>
-                <Button variant={button.variant} color="secondary" size="large">
-                  {button.text}
-                </Button>
-              </Link>
-            ))}
+            <Typography variant="h3" sx={{ fontWeight: 800, color: vars.textPrimary, mb: 2 }}>
+              Ready to build something great?
+            </Typography>
+            <Typography variant="body1" sx={{ color: vars.textSecondary, mb: 5, maxWidth: 480, mx: "auto" }}>
+              Let&apos;s turn your idea into a production-ready product. Book a
+              free discovery call today.
+            </Typography>
+            <Button
+              variant="contained"
+              color="primary"
+              size="large"
+              href={CALENDLY_BOOK_CALL_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              startIcon={<CalendarMonthIcon />}
+              sx={{ px: 5, py: 1.8, fontWeight: 700, fontSize: "1rem" }}
+            >
+              Book a Free Call
+            </Button>
           </Box>
         </FadeInSection>
-      </Box>
-
-      {/* --- MAIN CONTENT SECTIONS --- */}
-      <Box
-        sx={{
-          maxWidth: 1200,
-          mx: "auto",
-          bgcolor: theme.palette.background.paper + "DD", // transparency
-          p: { xs: 3, sm: 4 },
-          borderRadius: 2,
-          boxShadow: 3,
-          color: theme.palette.text.primary,
-        }}
-      >
-        <ServicesSection />
-        <Divider sx={{ my: 6, borderColor: "#444" }} />
-        <TechStackSection />
-        <Divider sx={{ my: 6, borderColor: "#444" }} />
-        <MyValuesSection />
-        <Divider sx={{ my: 6, borderColor: "#444" }} />
-        <WorkExperienceTimeline />
-        <Divider sx={{ my: 6, borderColor: "#444" }} />
-        <VolunteerExperienceTimeline />
       </Box>
     </Box>
   );

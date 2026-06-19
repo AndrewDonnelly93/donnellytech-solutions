@@ -7,12 +7,12 @@ import {
   Typography,
   List,
   ListItem,
-  Grid,
+  useMediaQuery,
 } from "@mui/material";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useTheme, useMediaQuery } from "@mui/material";
+import { vars } from "../../themeVars";
+import { useRevealOnView } from "../hooks/useRevealOnView";
 
-// Define an interface for volunteer event
 interface VolunteerEvent {
   role: string;
   organization: string;
@@ -20,7 +20,6 @@ interface VolunteerEvent {
   points: string[];
 }
 
-// Array for volunteer experience with refined, UK English copy
 const volunteerEvents: VolunteerEvent[] = [
   {
     role: "English Language Mentor",
@@ -44,9 +43,73 @@ const volunteerEvents: VolunteerEvent[] = [
   },
 ];
 
+function VolunteerTimelineCard({ event }: { event: VolunteerEvent }) {
+  const { ref, visible } = useRevealOnView();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={visible ? { opacity: 1, y: 0 } : undefined}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      <Card
+        sx={{
+          p: 3,
+          backgroundColor: vars.surface,
+          color: vars.textPrimary,
+          border: `1px solid ${vars.border}`,
+          boxShadow: vars.cardShadow,
+          transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-5px)",
+            boxShadow: "0 12px 40px color-mix(in srgb, var(--mui-palette-custom-volunteer) 20%, transparent)",
+          },
+        }}
+      >
+        <CardContent>
+          <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
+            {event.role}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{ color: vars.volunteer, fontWeight: 600, mb: 1 }}
+          >
+            {event.organization}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ color: vars.textSecondary, fontStyle: "italic", mb: 2 }}
+          >
+            {event.date}
+          </Typography>
+          <List sx={{ p: 0 }}>
+            {event.points.map((point, idx) => (
+              <ListItem
+                key={idx}
+                sx={{
+                  display: "list-item",
+                  listStyleType: "disc",
+                  pl: 2,
+                  p: 0,
+                  mb: 1,
+                  color: vars.textPrimary,
+                }}
+              >
+                <Typography variant="body1" sx={{ color: vars.textPrimary }}>
+                  {point}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
 export default function VolunteerExperienceTimeline() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const { scrollYProgress } = useScroll();
   const scaleY = useSpring(scrollYProgress, {
@@ -62,15 +125,15 @@ export default function VolunteerExperienceTimeline() {
         py: 8,
         px: 2,
         mt: 4,
-        borderTop: "1px solid #444",
+        borderTop: `1px solid ${vars.divider}`,
       }}
     >
       <Typography
         variant="h2"
-        component="h1"
+        component="h2"
         align="center"
         gutterBottom
-        sx={{ fontWeight: "bold", color: "white", mb: 8 }}
+        sx={{ fontWeight: 800, color: vars.textPrimary, mb: 8 }}
       >
         Volunteer & Mentorship
       </Typography>
@@ -82,7 +145,7 @@ export default function VolunteerExperienceTimeline() {
           bottom: 0,
           left: "20px",
           width: "4px",
-          backgroundColor: "#333",
+          backgroundColor: vars.timelineTrack,
           zIndex: 0,
         }}
       >
@@ -91,83 +154,26 @@ export default function VolunteerExperienceTimeline() {
             scaleY,
             height: "100%",
             width: "100%",
-            backgroundColor: "#4CAF50", // A different color for the volunteer timeline
+            backgroundColor: "var(--mui-palette-custom-volunteer)",
             transformOrigin: "top",
           }}
         />
       </Box>
 
       <Box sx={{ maxWidth: 900, mx: "auto" }}>
-        {volunteerEvents.map((event, i) => {
-          return (
-            <Box
-              key={i}
-              sx={{
-                mb: 4,
-                position: "relative",
-                zIndex: 1,
-                pl: isMobile ? "40px" : 0,
-              }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Card
-                  sx={{
-                    p: 3,
-                    backgroundColor: "rgba(44, 44, 44, 0.9)",
-                    color: "white",
-                    border: "1px solid #444",
-                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-                    transition:
-                      "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                    "&:hover": {
-                      transform: "translateY(-5px)",
-                      boxShadow: "0 12px 40px 0 rgba(76, 175, 80, 0.2)",
-                    },
-                  }}
-                >
-                  <CardContent>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
-                      {event.role}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{ color: "#a5d6a7", fontWeight: 600, mb: 1 }}
-                    >
-                      {event.organization}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "#ccc", fontStyle: "italic", mb: 2 }}
-                    >
-                      {event.date}
-                    </Typography>
-                    <List sx={{ p: 0 }}>
-                      {event.points.map((point, idx) => (
-                        <ListItem
-                          key={idx}
-                          sx={{
-                            display: "list-item",
-                            listStyleType: "disc",
-                            pl: 2,
-                            p: 0,
-                            mb: 1,
-                          }}
-                        >
-                          <Typography variant="body1">{point}</Typography>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Box>
-          );
-        })}
+        {volunteerEvents.map((event, i) => (
+          <Box
+            key={i}
+            sx={{
+              mb: 4,
+              position: "relative",
+              zIndex: 1,
+              pl: isMobile ? "40px" : 0,
+            }}
+          >
+            <VolunteerTimelineCard event={event} />
+          </Box>
+        ))}
       </Box>
     </Box>
   );
