@@ -1,24 +1,24 @@
+"use client";
 import React from "react";
 import { Box, Typography, Link as MuiLink } from "@mui/material";
 import LinkedInIcon from "@mui/icons-material/LinkedIn";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { useTheme } from "@mui/material/styles";
+import { vars } from "../../themeVars";
 
 export default function Footer() {
-  const theme = useTheme();
-
   return (
     <Box
       component="footer"
       sx={{
-        bgcolor: theme.palette.primary.main,
-        color: theme.palette.secondary.main,
+        bgcolor: vars.backgroundPaper,
+        color: vars.textSecondary,
+        borderTop: `1px solid ${vars.divider}`,
         py: 3,
         textAlign: "center",
         fontSize: "0.9rem",
       }}
     >
-      <Typography gutterBottom>
+      <Typography gutterBottom sx={{ color: vars.textPrimary }}>
         &copy; {new Date().getFullYear()} Donnelly Tech Solutions
       </Typography>
       <Typography gutterBottom>All rights reserved.</Typography>
@@ -27,19 +27,15 @@ export default function Footer() {
         <MuiLink
           href="mailto:andrew.donnelly.1403@gmail.com"
           sx={{
-            color: theme.palette.secondary.main,
+            color: vars.primaryMain,
             textDecoration: "underline",
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
+            "&:hover": { color: vars.primaryDark },
           }}
         >
           andrew.donnelly.1403@gmail.com
         </MuiLink>
       </Typography>
 
-      {/* Single flex container for all links to ensure perfect alignment */}
       <Box
         sx={{
           display: "flex",
@@ -47,10 +43,9 @@ export default function Footer() {
           justifyContent: "center",
           alignItems: "center",
           mt: 2,
-          gap: 1, // Handles spacing between all items
+          gap: 1,
         }}
       >
-        {/* Social Link: LinkedIn */}
         <MuiLink
           href="https://www.linkedin.com/in/andrewdonnelly93/"
           target="_blank"
@@ -58,7 +53,7 @@ export default function Footer() {
           sx={{
             display: "inline-flex",
             alignItems: "center",
-            color: theme.palette.secondary.main,
+            color: vars.textSecondary,
             textDecoration: "none",
             py: 0.5,
             px: 1.5,
@@ -66,9 +61,9 @@ export default function Footer() {
             border: "1px solid transparent",
             transition: "all 0.3s ease",
             "&:hover": {
-              color: theme.palette.secondary.light,
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              borderColor: theme.palette.secondary.main,
+              color: vars.primaryMain,
+              backgroundColor: "color-mix(in srgb, var(--mui-palette-primary-main) 10%, transparent)",
+              borderColor: "color-mix(in srgb, var(--mui-palette-primary-main) 25%, transparent)",
             },
           }}
         >
@@ -76,12 +71,8 @@ export default function Footer() {
           LinkedIn
         </MuiLink>
 
-        {/* Separator */}
-        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-          |
-        </Box>
+        <Box component="span" sx={{ color: vars.divider }}>|</Box>
 
-        {/* Social Link: GitHub */}
         <MuiLink
           href="https://github.com/AndrewDonnelly93"
           target="_blank"
@@ -89,7 +80,7 @@ export default function Footer() {
           sx={{
             display: "inline-flex",
             alignItems: "center",
-            color: theme.palette.secondary.main,
+            color: vars.textSecondary,
             textDecoration: "none",
             py: 0.5,
             px: 1.5,
@@ -97,9 +88,9 @@ export default function Footer() {
             border: "1px solid transparent",
             transition: "all 0.3s ease",
             "&:hover": {
-              color: theme.palette.secondary.light,
-              backgroundColor: "rgba(255, 255, 255, 0.1)",
-              borderColor: theme.palette.secondary.main,
+              color: vars.primaryMain,
+              backgroundColor: "color-mix(in srgb, var(--mui-palette-primary-main) 10%, transparent)",
+              borderColor: "color-mix(in srgb, var(--mui-palette-primary-main) 25%, transparent)",
             },
           }}
         >
@@ -107,86 +98,14 @@ export default function Footer() {
           GitHub
         </MuiLink>
 
-        {/* Separator */}
-        <Box
-          component="span"
-          sx={{
-            color: theme.palette.secondary.main,
-            display: { xs: "none", sm: "inline" },
-          }}
-        >
-          |
-        </Box>
-
-        {/* Page Link: Services */}
-        <MuiLink
-          href="/services"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          Services
-        </MuiLink>
-
-        {/* Separator */}
-        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-          |
-        </Box>
-
-        {/* Page Link: Portfolio */}
-        <MuiLink
-          href="/portfolio"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          Portfolio
-        </MuiLink>
-
-        {/* Separator */}
-        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-          |
-        </Box>
+        <Box component="span" sx={{ color: vars.divider, display: { xs: "none", sm: "inline" } }}>|</Box>
 
         <MuiLink
-          href="/about"
+          href="/#contact"
           sx={{
-            color: theme.palette.secondary.main,
+            color: vars.textSecondary,
             textDecoration: "underline",
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
-          }}
-        >
-          About
-        </MuiLink>
-
-        {/* Separator */}
-        <Box component="span" sx={{ color: theme.palette.secondary.main }}>
-          |
-        </Box>
-
-        {/* Page Link: Contact */}
-        <MuiLink
-          href="/contact"
-          sx={{
-            color: theme.palette.secondary.main,
-            textDecoration: "underline",
-            transition: "color 0.3s ease",
-            "&:hover": {
-              color: theme.palette.secondary.dark || "#b38b00",
-            },
+            "&:hover": { color: vars.primaryMain },
           }}
         >
           Contact

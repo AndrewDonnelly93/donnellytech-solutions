@@ -7,10 +7,11 @@ import {
   Typography,
   List,
   ListItem,
-  Grid,
+  useMediaQuery,
 } from "@mui/material";
 import { motion, useScroll, useSpring } from "framer-motion";
-import { useTheme, useMediaQuery } from "@mui/material";
+import { vars } from "../../themeVars";
+import { useRevealOnView } from "../hooks/useRevealOnView";
 
 interface TimelineEvent {
   role: string;
@@ -21,24 +22,30 @@ interface TimelineEvent {
 
 const workEvents: TimelineEvent[] = [
   {
-    role: "Business Owner | Full-Stack Developer",
+    role: "Founder | Senior Software Engineer",
     organization: "Donnelly Tech Solutions",
     date: "Aug 2024 – Present",
     points: [
-      "Partner directly with clients to design, build, and deploy custom web applications from concept to launch.",
-      "Automate client workflows and reduce manual overhead by up to 30% through custom software solutions.",
-      "Lead full-stack development using a modern tech stack including React, Next.js, Node.js, and TypeScript.",
-      "Manage the complete project lifecycle, from initial client communication to final technical strategy and delivery.",
+      "Founded and led Donnelly Tech Solutions Ltd, delivering custom software solutions across multiple business domains and industries.",
+      "Partnered with stakeholders to analyze business challenges, streamline workflows, and implement digital transformation initiatives that improved operational efficiency and reduced overhead.",
+      "Designed scalable software architectures and established engineering best practices, ensuring long-term maintainability, reliability, and business alignment.",
+      "Led end-to-end product delivery, driving Agile development processes, cross-functional collaboration, and continuous improvement to maximize team productivity and project success.",
+      "Provided strategic technical leadership, balancing business objectives, user experience, system scalability, and delivery timelines to achieve measurable outcomes for clients.",
+      "Championed modern software engineering practices, including quality assurance, automation, architecture governance, and performance optimization, resulting in higher product quality and faster delivery cycles."
     ],
   },
   {
-    role: "Software Engineer",
+    role: "Senior Software Engineer",
     organization: "Glesk Management Limited",
     date: "Oct 2022 – Aug 2024",
     points: [
-      "Engineered and maintained features for high-traffic insurance and mental health platforms serving European clients.",
-      "Enhanced UI consistency and code quality by implementing styled-components and automated code checks.",
-      "Mentored and upskilled junior developers through targeted pair programming and knowledge-sharing sessions.",
+      "Contributed to large-scale insurance and mental health platforms serving European clients, delivering secure, scalable, and user-centric solutions.",
+      "Designed and enhanced microfrontend and microservices architectures, improving system modularity, team autonomy, and deployment flexibility.",
+      "Implemented event-driven communication patterns using Apache Kafka and CQRS principles to support scalable, resilient, and high-performance business workflows.",
+      "Applied domain-driven design, design patterns, and architectural best practices to improve maintainability, extensibility, and long-term product sustainability.",
+      "Established automated quality gates, testing standards, and CI/CD pipelines on AWS, accelerating release cycles while maintaining high software quality and reliability.",
+      "Collaborated with cross-functional teams to modernize engineering processes, improve developer productivity, and enhance overall platform performance.",
+      "Mentored junior engineers through architecture reviews, pair programming, and technical knowledge-sharing initiatives, fostering engineering excellence across teams.",
     ],
   },
   {
@@ -46,56 +53,108 @@ const workEvents: TimelineEvent[] = [
     organization: "Knowledge City",
     date: "Dec 2021 – Sept 2022",
     points: [
-      "Developed key UI features for an online educational platform, improving user engagement and functionality.",
-      "Architected a flexible certificate template editor with fabricJS, empowering users to create custom designs.",
-      "Increased application stability and performance by refactoring and modularising legacy components.",
     ],
   },
   {
-    role: "Software Engineer",
+    role: "Senior Software Engineer",
     organization: "Ocuco Limited",
     date: "Jan 2021 – Aug 2021",
-    points: [
-      "Delivered a library of reusable UI components with React and TypeScript, accelerating future development.",
-      "Strengthened deployment processes by contributing to CI/CD pipelines with Azure DevOps.",
-      "Ensured high-quality feature delivery by working closely with QA and business analysts on software for the optical industry.",
-    ],
+    points: [],
   },
   {
     role: "Software Engineer",
     organization: "Viasat Europe Limited",
     date: "Jan 2020 – Dec 2020",
-    points: [
-      "Spearheaded the creation of a portal builder app that enabled non-technical users to prototype in-flight entertainment systems.",
-      "Built dynamic UI components for in-flight experiences, including weather, video players, and banners.",
-      "Implemented and managed CI/CD workflows with Jenkins and Docker to automate testing and deployment.",
-    ],
+    points: [],
   },
   {
     role: "Software Engineer",
     organization: "NRGSOFT",
     date: "Mar 2017 – Jan 2020",
     points: [
-      "Contributed to a large-scale e-assessment platform, supporting a wide variety of question types and workflows.",
-      "Developed complex, specialised assessment tools, including integrated code editors and mathematical editors.",
-      "Managed complex asynchronous data flows and application state effectively using Redux-Saga.",
-    ],
-  },
-  {
-    role: "Copywriter & Content Strategist",
-    organization: "Internet Open & Freelance",
-    date: "2011 – 2015",
-    points: [
-      "Crafted compelling, SEO-optimised copy for a diverse range of clients in sectors including law, manufacturing, and retail.",
-      "Translated complex product features and legal jargon into clear, benefit-driven content for websites and marketing materials.",
-      "Developed a strong foundation in communication, which now informs my ability to write clear documentation and collaborate effectively with non-technical stakeholders.",
+      "Contributed to the development and modernization of a large-scale e-assessment platform, delivering scalable and high-performance solutions supporting diverse assessment workflows and question types.",
+      "Designed and implemented advanced assessment capabilities, including interactive coding environments, mathematical evaluation tools, and dynamic content delivery systems to enhance the learner experience.",
+      "Leveraged microfrontend architecture and Webpack Module Federation to enable independent deployments, improve team scalability, and accelerate feature delivery across distributed engineering teams.",
+      "Architected modern frontend solutions emphasizing modularity, reusability, maintainability, accessibility, and performance optimization across complex user journeys.",
+      "Optimized global content delivery and application performance through Cloudflare, CDN strategies, edge caching, asset optimization, and web performance best practices, improving page load times and platform responsiveness.",
+      "Collaborated closely with product, design, and engineering teams to translate complex educational requirements into intuitive and scalable user experiences.",
+      "Established engineering best practices, including automated testing, code quality standards, CI/CD pipelines, performance monitoring, and observability, supporting reliable and continuous product delivery.",
+      "Contributed to frontend platform governance by driving architectural consistency, security improvements, and performance enhancements across multiple applications and teams.",
     ],
   },
 ];
 
+function WorkTimelineCard({ event }: { event: TimelineEvent }) {
+  const { ref, visible } = useRevealOnView();
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={visible ? { opacity: 1, y: 0 } : undefined}
+      transition={{ duration: 0.6, delay: 0.2 }}
+    >
+      <Card
+        sx={{
+          p: 3,
+          backgroundColor: vars.surface,
+          color: vars.textPrimary,
+          border: `1px solid ${vars.border}`,
+          boxShadow: vars.cardShadow,
+          transition: "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
+          "&:hover": {
+            transform: "translateY(-5px)",
+            boxShadow: "0 12px 40px color-mix(in srgb, var(--mui-palette-secondary-main) 20%, transparent)",
+          },
+        }}
+      >
+        <CardContent>
+          <Typography variant="h5" sx={{ fontWeight: 700, mb: 1 }}>
+            {event.role}
+          </Typography>
+          <Typography
+            variant="subtitle1"
+            sx={{
+              color: vars.secondaryLight,
+              fontWeight: 600,
+              mb: 1,
+            }}
+          >
+            {event.organization}
+          </Typography>
+          <Typography
+            variant="body2"
+            sx={{ color: vars.textSecondary, fontStyle: "italic", mb: 2 }}
+          >
+            {event.date}
+          </Typography>
+          <List sx={{ p: 0 }}>
+            {event.points.map((point, idx) => (
+              <ListItem
+                key={idx}
+                sx={{
+                  display: "list-item",
+                  listStyleType: "disc",
+                  pl: 2,
+                  p: 0,
+                  mb: 1,
+                  color: vars.textPrimary,
+                }}
+              >
+                <Typography variant="body1" sx={{ color: vars.textPrimary }}>
+                  {point}
+                </Typography>
+              </ListItem>
+            ))}
+          </List>
+        </CardContent>
+      </Card>
+    </motion.div>
+  );
+}
+
 export default function WorkExperienceTimeline() {
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+  const isMobile = useMediaQuery("(max-width:600px)");
 
   const { scrollYProgress } = useScroll();
   const scaleY = useSpring(scrollYProgress, {
@@ -108,23 +167,22 @@ export default function WorkExperienceTimeline() {
     <Box sx={{ position: "relative", py: 8, px: 2 }}>
       <Typography
         variant="h2"
-        component="h1"
+        component="h2"
         align="center"
         gutterBottom
-        sx={{ fontWeight: "bold", color: "white", mb: 8 }}
+        sx={{ fontWeight: 800, color: vars.textPrimary, mb: 8 }}
       >
         Professional Experience
       </Typography>
 
-      {/* The timeline line, now positioned on the left for mobile */}
       <Box
         sx={{
           position: "absolute",
           top: "120px",
           bottom: 0,
-          left: "20px", // Keep it on the left for a cleaner single-column look
+          left: "20px",
           width: "4px",
-          backgroundColor: "#333",
+          backgroundColor: vars.timelineTrack,
           zIndex: 0,
         }}
       >
@@ -133,88 +191,26 @@ export default function WorkExperienceTimeline() {
             scaleY,
             height: "100%",
             width: "100%",
-            backgroundColor: theme.palette.secondary.main,
+            backgroundColor: vars.secondaryMain,
             transformOrigin: "top",
           }}
         />
       </Box>
 
-      {/* Container for the timeline items */}
       <Box sx={{ maxWidth: 900, mx: "auto" }}>
-        {workEvents.map((event, i) => {
-          return (
-            <Box
-              key={i}
-              sx={{
-                mb: 4,
-                position: "relative",
-                zIndex: 1,
-                pl: isMobile ? "40px" : 0, // Add padding to not overlap the line on mobile
-              }}
-            >
-              <motion.div
-                initial={{ opacity: 0, y: 50 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.2 }}
-              >
-                <Card
-                  sx={{
-                    p: 3,
-                    backgroundColor: "rgba(44, 44, 44, 0.9)",
-                    color: "white",
-                    border: "1px solid #444",
-                    boxShadow: "0 8px 32px 0 rgba(0, 0, 0, 0.37)",
-                    transition:
-                      "transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out",
-                    "&:hover": {
-                      transform: "translateY(-5px)",
-                      boxShadow: "0 12px 40px 0 rgba(242, 201, 76, 0.2)",
-                    },
-                  }}
-                >
-                  <CardContent>
-                    <Typography variant="h5" sx={{ fontWeight: "bold", mb: 1 }}>
-                      {event.role}
-                    </Typography>
-                    <Typography
-                      variant="subtitle1"
-                      sx={{
-                        color: theme.palette.secondary.light,
-                        fontWeight: 600,
-                        mb: 1,
-                      }}
-                    >
-                      {event.organization}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      sx={{ color: "#ccc", fontStyle: "italic", mb: 2 }}
-                    >
-                      {event.date}
-                    </Typography>
-                    <List sx={{ p: 0 }}>
-                      {event.points.map((point, idx) => (
-                        <ListItem
-                          key={idx}
-                          sx={{
-                            display: "list-item",
-                            listStyleType: "disc",
-                            pl: 2,
-                            p: 0,
-                            mb: 1,
-                          }}
-                        >
-                          <Typography variant="body1">{point}</Typography>
-                        </ListItem>
-                      ))}
-                    </List>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            </Box>
-          );
-        })}
+        {workEvents.map((event, i) => (
+          <Box
+            key={i}
+            sx={{
+              mb: 4,
+              position: "relative",
+              zIndex: 1,
+              pl: isMobile ? "40px" : 0,
+            }}
+          >
+            <WorkTimelineCard event={event} />
+          </Box>
+        ))}
       </Box>
     </Box>
   );
